@@ -1,0 +1,36 @@
+CREATE DATABASE talktosql_sample_db;
+USE talktosql_sample_db;
+
+CREATE TABLE Owners (
+  owner_id INT PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  email VARCHAR(100),
+  phone VARCHAR(20)
+);
+
+CREATE TABLE Pets (
+  pet_id INT PRIMARY KEY,
+  owner_id INT,
+  pet_name VARCHAR(50),
+  species VARCHAR(50),
+  breed VARCHAR(50),
+  age INT,
+  gender VARCHAR(10),
+  FOREIGN KEY (owner_id) REFERENCES Owners(owner_id)
+);
+
+
+INSERT INTO Owners (owner_id, first_name, last_name, email, phone)
+VALUES (1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890'),
+       (2, 'Jane', 'Doe', 'jane.doe@example.com', '987-654-3210'),
+       (3, 'Bob', 'Smith', 'bob.smith@example.com', '555-555-1212'),
+       (4, 'Alice', 'Johnson', 'alice.johnson@example.com', '111-222-3333'),
+       (5, 'David', 'Lee', 'david.lee@example.com', '444-444-4444');
+
+INSERT INTO Pets (pet_id, owner_id, pet_name, species, breed, age, gender)
+VALUES (1, 1, 'Max', 'Dog', 'Golden Retriever', 3, 'Male'),
+       (2, 1, 'Charlie', 'Cat', 'Siamese', 2, 'Female'),
+       (3, 2, 'Luna', 'Dog', 'Labrador', 1, 'Female'),
+       (4, 3, 'Buddy', 'Dog', 'Poodle', 4, 'Male'),
+       (5, 4, 'Mittens', 'Cat', 'Calico', 5, 'Female');
