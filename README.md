@@ -8,24 +8,25 @@ TalkToSQL is an CLI tool that lets you query your DB with natural language inste
 $ talktosql learn
 Successfully saved the DB Schema Info to /Users/woniesong92/.talktosql_schema_info
 
-$ talktosql ask --q "Who owns a dog?"
-SELECT o.first_name, o.last_name FROM Owners o JOIN Pets p ON o.owner_id = p.owner_id WHERE p.species = 'dog';
-+------------+-----------+
-| first_name | last_name |
-+------------+-----------+
-|    John    |    Doe    |
-|    Jane    |    Doe    |
-|    Bob     |   Smith   |
-+------------+-----------+
-
-$ talktosql ask --q "Is there anyone who owns a cat named Mittens?"
-SELECT o.first_name, o.last_name FROM Owners o JOIN Pets p ON o.owner_id = p.owner_id WHERE p.species = 'cat' AND p.pet_name = 'Mittens';
-+------------+-----------+
-| first_name | last_name |
-+------------+-----------+
-|   Alice    |  Johnson  |
-+------------+-----------+
+$ talktosql ask --q "Find the total sales per author for books published after the year 1800"
+SELECT a.name, SUM(b.price * o.quantity) as total_sales
+FROM authors a
+JOIN books b ON a.id = b.author_id
+JOIN orders o ON b.id = o.book_id
+WHERE b.publication_date > '1800-12-31'
+GROUP BY a.name;
++--------------------+-------------+
+|        name        | total_sales |
++--------------------+-------------+
+|    J.K. Rowling    |    10.99    |
+| George R.R. Martin |    12.99    |
+|   J.R.R. Tolkien   |    23.98    |
+|  Haruki Murakami   |    14.99    |
+|    Jane Austen     |    29.97    |
++--------------------+-------------+
 ```
+
+![talktosql-demo-gif](https://user-images.githubusercontent.com/2935309/229308121-df48b64a-b54a-425c-a256-f86f33da332e.gif)
 
 ## Quickstart
 
