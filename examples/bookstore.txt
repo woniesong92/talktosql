@@ -1,0 +1,73 @@
+-- Copy and paste below inside your MySQL Shell
+-- Create DB schema for a online bookstore
+
+CREATE DATABASE talktosql_sample_db;
+USE talktosql_sample_db;
+
+CREATE TABLE authors (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    birthdate DATE NOT NULL,
+    nationality VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE books (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    publication_date DATE NOT NULL,
+    author_id INT NOT NULL,
+    genre VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors(id)
+);
+
+CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    book_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Insert authors
+INSERT INTO authors (name, birthdate, nationality) VALUES
+('J.K. Rowling', '1965-07-31', 'British'),
+('George R.R. Martin', '1948-09-20', 'American'),
+('J.R.R. Tolkien', '1892-01-03', 'British'),
+('Haruki Murakami', '1949-01-12', 'Japanese'),
+('Jane Austen', '1775-12-16', 'British');
+
+-- Insert books
+INSERT INTO books (title, publication_date, author_id, genre, price) VALUES
+('Harry Potter and the Philosopher\'s Stone', '1997-06-26', 1, 'Fantasy', 10.99),
+('A Game of Thrones', '1996-08-01', 2, 'Fantasy', 12.99),
+('The Lord of the Rings: The Fellowship of the Ring', '1954-07-29', 3, 'Fantasy', 11.99),
+('Kafka on the Shore', '2002-09-12', 4, 'Magical Realism', 14.99),
+('Pride and Prejudice', '1813-01-28', 5, 'Romance', 9.99);
+
+-- Insert customers
+INSERT INTO customers (first_name, last_name, email, phone, address) VALUES
+('Alice', 'Smith', 'alice.smith@example.com', '+1-555-123456', '123 Main St, New York, NY 10001'),
+('Bob', 'Johnson', 'bob.johnson@example.com', '+1-555-234567', '456 Oak St, Los Angeles, CA 90001'),
+('Carol', 'Williams', 'carol.williams@example.com', '+1-555-345678', '789 Elm St, Chicago, IL 60601'),
+('David', 'Brown', 'david.brown@example.com', '+1-555-456789', '123 Maple St, Houston, TX 77001'),
+('Eve', 'Jones', 'eve.jones@example.com', '+1-555-567890', '456 Pine St, Philadelphia, PA 19101');
+
+-- Insert orders
+INSERT INTO orders (customer_id, book_id, order_date, quantity) VALUES
+(1, 1, '2023-01-15', 1),
+(2, 2, '2023-01-20', 1),
+(3, 3, '2023-02-10', 2),
+(4, 4, '2023-02-15', 1),
+(5, 5, '2023-03-01', 3);

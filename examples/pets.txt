@@ -1,5 +1,9 @@
+-- Copy and paste below inside your MySQL Shell
+-- Create DB schema for pets and their owners
+
 CREATE DATABASE talktosql_sample_db;
 USE talktosql_sample_db;
+
 
 CREATE TABLE Owners (
   owner_id INT PRIMARY KEY,
@@ -8,6 +12,7 @@ CREATE TABLE Owners (
   email VARCHAR(100),
   phone VARCHAR(20)
 );
+
 
 CREATE TABLE Pets (
   pet_id INT PRIMARY KEY,
