@@ -2,7 +2,7 @@
 
 ![talktosql-thumbnail](https://user-images.githubusercontent.com/2935309/229311060-e02929cb-df3c-4a04-b6a8-b8585d114856.png)
 
-TalkToSQL is an CLI tool that lets you query your DB with natural language instead of SQL queries.
+TalkToSQL is an CLI tool that lets you query your DB with natural languages instead of SQL queries.
 
 ## Usage
 
@@ -11,6 +11,23 @@ $ talktosql learn
 Successfully saved the DB Schema Info to /Users/woniesong92/.talktosql_schema_info
 
 $ talktosql ask --q "Find the total sales per author for books published after the year 1800"
+SELECT a.name, SUM(b.price * o.quantity) as total_sales
+FROM authors a
+JOIN books b ON a.id = b.author_id
+JOIN orders o ON b.id = o.book_id
+WHERE b.publication_date > '1800-12-31'
+GROUP BY a.name;
++--------------------+-------------+
+|        name        | total_sales |
++--------------------+-------------+
+|    J.K. Rowling    |    10.99    |
+| George R.R. Martin |    12.99    |
+|   J.R.R. Tolkien   |    23.98    |
+|  Haruki Murakami   |    14.99    |
+|    Jane Austen     |    29.97    |
++--------------------+-------------+
+
+$ talktosql ask --q "1800년 이후로 출간된 책들의 매출을 작가별로 알려줘"
 SELECT a.name, SUM(b.price * o.quantity) as total_sales
 FROM authors a
 JOIN books b ON a.id = b.author_id
@@ -72,5 +89,11 @@ GROUP BY a.name;
 4. Query your DB in English intead of an SQL query
 
     ```sh
-    talktosql ask --q "how many dogs are there?"
+    talktosql ask --q "Find the total sales per author for books published after the year 1800"
+    ```
+
+5. Try querying your DB in any natural language (e.g. Korean) intead of an SQL query
+
+    ```sh
+    talktosql ask --q "1800년 이후로 출간된 책들의 매출을 작가별로 알려줘"
     ```
