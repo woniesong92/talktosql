@@ -1,5 +1,7 @@
 # TalkToSQL
 
+![talktosql-thumbnail](https://user-images.githubusercontent.com/2935309/229311060-e02929cb-df3c-4a04-b6a8-b8585d114856.png)
+
 TalkToSQL is an CLI tool that lets you query your DB with natural language instead of SQL queries.
 
 ## Usage
