@@ -86,13 +86,13 @@ GROUP BY a.name;
     talktosql learn
     ```
 
-4. Query your DB in English intead of an SQL query
+4. Query your DB in English instead of an SQL query
 
     ```sh
     talktosql ask --q "Find the total sales per author for books published after the year 1800"
     ```
 
-5. Try querying your DB in any natural language (e.g. Korean) intead of an SQL query
+5. Try querying your DB in any natural language (e.g. Korean) instead of an SQL query
 
     ```sh
     talktosql ask --q "1800년 이후로 출간된 책들의 매출을 작가별로 알려줘"
