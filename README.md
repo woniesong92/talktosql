@@ -56,7 +56,7 @@ GROUP BY a.name;
     ```
 2. Set the environment variables
 
-    You can create a `.env` file in your local directory to get kickstarted.
+    You can create a `.env` file in your local directory to get quickstarted.
 
     ```.env
     OPENAI_API_KEY="SOME_API_KEY"
